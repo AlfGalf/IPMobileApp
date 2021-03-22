@@ -1,10 +1,13 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:ip_app_1/Screens/CameraScreen.dart';
 
 import 'SettingsScreen.dart';
 import 'HistoryScreen.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key key}) : super(key: key);
+  final CameraDescription camera;
+  MainScreen({Key key, this.camera}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -17,13 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: IconButton(
-            iconSize: 40,
-            icon: Icon(Icons.info_outline),
-            onPressed: () {
-              print("hi!");
-            },
-          )
+          child: Text("")
         ),
         leading: IconButton(
           iconSize: 40,
@@ -44,19 +41,19 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'Tap to translate',
-              style: TextStyle(fontSize: 20)
+            Spacer(flex: 1),
+            SizedBox(
+              child: ElevatedButton(
+                child: Text("Tap to translate", style: TextStyle(fontSize: 18)),
+                onPressed: () => {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => CameraScreen(camera: widget.camera)))
+                },
+              ),
+              width: 300,
             ),
-            IconButton(
-              iconSize: 70,
-              icon: Icon(Icons.play_circle_outline),
-              onPressed: () => {
-                print("Test!")
-              },
-            ),
+            Spacer(flex: 1)
           ],
         ),
       ),
